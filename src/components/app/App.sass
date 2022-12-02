@@ -3,3 +3,27 @@
 .app
   min-height: 100vh
   background-color: $backgroundColor
+
+.container
+  margin: 0 auto
+  max-width: 320px
+
+@media (min-width: $breakpoint_sm)
+  .container
+    max-width: 520px
+
+@media (min-width: $breakpoint_md)
+  .container
+    max-width: 720px
+
+@media (min-width: $breakpoint_xl)
+  .container
+    max-width: 980px
+
+@media (min-width: $breakpoints_xxl)
+  .container
+    max-width: 1100px
+
+@media (min-width: $breakpoints_xxxl)
+  .container
+    max-width: 1500px

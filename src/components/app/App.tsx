@@ -7,8 +7,8 @@ import "./rezet.sass";
 function App() {
   return (
     <div className="app">
-      <Auth/>
-      {/* <ProjectsPage/> */}
+      {/* <Auth/> */}
+      <ProjectsPage/>
     </div>
   );
 }
