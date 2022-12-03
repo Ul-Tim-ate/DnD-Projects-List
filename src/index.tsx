@@ -3,6 +3,8 @@ import ReactDOM from "react-dom/client";
 import "./index.sass";
 import App from "./components/app/App";
 import { initializeApp } from "firebase/app";
+import AuthService from "./services/authService";
+import { GlobalServices } from "./types/global-services";
 
 const app = initializeApp({
   apiKey: "AIzaSyBAIa8OG0eqbPGBNpEV0To4J538G2Ex7Go",
@@ -13,12 +15,18 @@ const app = initializeApp({
   appId: "1:427055786718:web:982f3b0fd08fabde9cb04f",
 });
 
+const authService = new AuthService();
+export const ServicesContext = React.createContext<GlobalServices>({
+  authService,
+});
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <ServicesContext.Provider value={{ authService }}>
+      <App />
+    </ServicesContext.Provider>
   </React.StrictMode>
 );

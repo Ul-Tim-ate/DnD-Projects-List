@@ -1,4 +1,5 @@
 import React from "react";
+import "./my-spinner.sass";
 
 const MySpinner = () => {
   return (

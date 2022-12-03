@@ -1,8 +1,10 @@
-import React from "react";
-import authService from "../../services/authService";
+import React, { useContext } from "react";
+import { ServicesContext } from "../..";
+import AuthService from "../../services/authService";
 import "./auth.sass";
 
 const Auth = () => {
+  const { authService } = useContext(ServicesContext);
   const login = async () => {
     authService.signInWithGoogle();
   };
