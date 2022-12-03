@@ -3,9 +3,9 @@ import "./projects-item.sass";
 
 const ProjectsItem = () => {
   return (
-    <div className="s">
-      <div className="projects-item">ProjectsItem</div>
-    </div>
+    <li className="projects-item">
+      <span className="projects-item__text">ProjectItem</span>
+    </li>
   );
 };
 

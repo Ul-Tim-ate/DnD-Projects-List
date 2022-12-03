@@ -1,0 +1,23 @@
+
+// @media (min-width: $breakpoint_sm)
+//   .projects-list
+
+@media (min-width: $breakpoint_md)
+  .projects-list
+    display: flex
+    column-gap: 30px
+    flex-wrap: wrap 
+    row-gap: 20px
+    &>li:not(:last-child)
+      margin-bottom: 0
+
+@media (min-width: $breakpoint_xl)
+  .projects-list
+    &__header
+      
+
+// @media (min-width: $breakpoints_xxl)
+//   .projects-list
+
+// @media (min-width: $breakpoints_xxxl)
+//   .projects-list
