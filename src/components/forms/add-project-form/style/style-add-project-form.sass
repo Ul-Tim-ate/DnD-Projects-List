@@ -1,0 +1,32 @@
+.add-project-form
+  display: flex
+  flex-direction: column
+  &__label
+    font-size: 20px
+    margin-bottom: 10px
+  &__input
+    border: 1px solid $darkGrey
+    padding: 10px
+    border-radius: 10px
+    width: 220px
+  &__buttons
+    margin-top: 20px
+    display: flex
+    align-items: center
+    justify-content: space-between
+    transition: 0.2s
+  &__button
+    font-size: 18px
+    &:first-child
+      background-color: $addButton
+      color: $white
+      border-radius: 10px
+      padding: 5px
+      &:hover
+        color: $green
+    &:last-child
+      padding: 5px
+      border-radius: 10px
+      border: 1px solid $addButton
+      &:hover
+        color: red
