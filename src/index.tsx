@@ -5,6 +5,8 @@ import App from "./components/app/App";
 import { initializeApp } from "firebase/app";
 import AuthService from "./services/authService";
 import { GlobalServices } from "./types/global-services";
+import { DbService } from "./services/dbService";
+import { getFirestore } from "firebase/firestore";
 
 const app = initializeApp({
   apiKey: "AIzaSyBAIa8OG0eqbPGBNpEV0To4J538G2Ex7Go",
@@ -16,8 +18,12 @@ const app = initializeApp({
 });
 
 const authService = new AuthService();
+const db = getFirestore(app);
+const dbService = new DbService(db);
+
 export const ServicesContext = React.createContext<GlobalServices>({
   authService,
+  dbService,
 });
 
 const root = ReactDOM.createRoot(
@@ -25,7 +31,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <ServicesContext.Provider value={{ authService }}>
+    <ServicesContext.Provider value={{ authService, dbService }}>
       <App />
     </ServicesContext.Provider>
   </React.StrictMode>

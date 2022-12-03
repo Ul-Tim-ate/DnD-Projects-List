@@ -8,16 +8,6 @@ const ProjectsList = () => {
       <ProjectsItem />
       <ProjectsItem />
       <ProjectsItem />
-      <ProjectsItem />
-      <ProjectsItem />
-      <ProjectsItem />
-      <ProjectsItem />
-      <ProjectsItem />
-      <ProjectsItem />
-      <ProjectsItem />
-      <ProjectsItem />
-      <ProjectsItem />
-      <ProjectsItem />
     </ul>
   );
 };
