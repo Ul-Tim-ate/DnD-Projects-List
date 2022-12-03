@@ -1,9 +1,18 @@
-import React from "react";
-import './add-project-form.sass'
+import React, { FC } from "react";
+import "./add-project-form.sass";
 
-const AddProjectForm = () => {
+interface AddProjectFormProps {
+  setModalActive: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const AddProjectForm: FC<AddProjectFormProps> = ({ setModalActive }) => {
   return (
-    <form className="add-project-form">
+    <form
+      className="add-project-form"
+      onSubmit={(e) => {
+        e.preventDefault();
+      }}
+    >
       <label className="add-project-form__label" htmlFor="name">
         Название проекта
       </label>
@@ -15,7 +24,14 @@ const AddProjectForm = () => {
       />
       <div className="add-project-form__buttons">
         <button className="add-project-form__button">Отправить</button>
-        <button className="add-project-form__button">Отмена</button>
+        <button
+          className="add-project-form__button"
+          onClick={() => {
+            setModalActive(false);
+          }}
+        >
+          Отмена
+        </button>
       </div>
     </form>
   );

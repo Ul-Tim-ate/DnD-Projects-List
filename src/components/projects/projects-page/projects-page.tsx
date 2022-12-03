@@ -7,7 +7,7 @@ import ProjectsList from "../projects-list/projects-list";
 import "./projects-page.sass";
 
 const ProjectsPage = () => {
-  const [modalActive, setModalActive] = useState(true);
+  const [modalActive, setModalActive] = useState(false);
   return (
     <div className="project-page">
       <Header />
@@ -23,7 +23,7 @@ const ProjectsPage = () => {
         </div>
       </div>
       <MyModal active={modalActive} setActive={setModalActive}>
-        <AddProjectForm/>
+        <AddProjectForm setModalActive={setModalActive} />
       </MyModal>
     </div>
   );
