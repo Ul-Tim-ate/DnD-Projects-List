@@ -1,5 +1,7 @@
-import React, { FC, useContext, useState } from "react";
-import { ServicesContext } from "../../..";
+import React, { FC, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useTypedSelector } from "../../../hooks/useTypedSelector";
+import { createProjectAction } from "../../redux/actions/projectActionCreator";
 import "./add-project-form.sass";
 
 interface AddProjectFormProps {
@@ -7,14 +9,15 @@ interface AddProjectFormProps {
 }
 
 const AddProjectForm: FC<AddProjectFormProps> = ({ setModalActive }) => {
-  const { dbService } = useContext(ServicesContext);
   const [name, setName] = useState("");
-  console.log(name);
-  
+  const data = useTypedSelector((state) => state.projecter);
+  console.log(data);
+  const dispatch = useDispatch();
   return (
     <form
       className="add-project-form"
       onSubmit={(e) => {
+        console.log("submit");
         e.preventDefault();
       }}
     >
@@ -32,7 +35,17 @@ const AddProjectForm: FC<AddProjectFormProps> = ({ setModalActive }) => {
         placeholder="Введите название проекта"
       />
       <div className="add-project-form__buttons">
-        <button className="add-project-form__button">Отправить</button>
+        <button
+          className="add-project-form__button"
+          onClick={(e) => {
+            e.preventDefault();
+            console.log("click");
+            dispatch(createProjectAction(name));
+            setModalActive(false);
+          }}
+        >
+          Отправить
+        </button>
         <button
           className="add-project-form__button"
           onClick={(e) => {

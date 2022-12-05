@@ -7,6 +7,9 @@ import AuthService from "./services/authService";
 import { GlobalServices } from "./types/global-services";
 import { DbService } from "./services/dbService";
 import { getFirestore } from "firebase/firestore";
+import { Provider } from "react-redux";
+import store from "./components/redux/store";
+// import store from "./redux/store";
 
 const app = initializeApp({
   apiKey: "AIzaSyBAIa8OG0eqbPGBNpEV0To4J538G2Ex7Go",
@@ -19,20 +22,21 @@ const app = initializeApp({
 
 const authService = new AuthService();
 const db = getFirestore(app);
-const dbService = new DbService(db);
+export const dbService = new DbService(db);
 
 export const ServicesContext = React.createContext<GlobalServices>({
   authService,
   dbService,
 });
-
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
+    <Provider store={store}>
     <ServicesContext.Provider value={{ authService, dbService }}>
       <App />
     </ServicesContext.Provider>
+    </Provider>
   </React.StrictMode>
 );

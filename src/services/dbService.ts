@@ -15,7 +15,7 @@ import AuthService from "./authService";
 export class DbService {
   db: Firestore;
   authService: AuthService;
-  
+
   constructor(db: Firestore) {
     this.db = db;
     this.authService = new AuthService();
@@ -26,11 +26,14 @@ export class DbService {
     return projects;
   };
 
-  addProject = async (name: string) => {
+  createProject = async (name: string) => {
+    console.log(name);
+    
     const docRef = await addDoc(collection(this.db, "projects"), {
       name: name,
       userId: this.authService.getUserAuth().currentUser?.uid,
     });
-    return docRef;
+    const newProject = { projectID: docRef.id, projectName: name };
+    return newProject;
   };
 }
