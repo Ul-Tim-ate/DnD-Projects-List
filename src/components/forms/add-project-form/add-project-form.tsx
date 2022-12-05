@@ -10,8 +10,6 @@ interface AddProjectFormProps {
 
 const AddProjectForm: FC<AddProjectFormProps> = ({ setModalActive }) => {
   const [name, setName] = useState("");
-  const data = useTypedSelector((state) => state.projecter);
-  console.log(data);
   const dispatch = useDispatch();
   return (
     <form

@@ -1,10 +1,17 @@
-import React from "react";
+import React, { FC } from "react";
 import "./projects-item.sass";
 
-const ProjectsItem = () => {
+interface ProjectsItemProps {
+  projectName: string;
+  projectID: string;
+}
+
+const ProjectsItem: FC<ProjectsItemProps> = ({ projectName, projectID }) => {
+  // console.log(projectName);
+  
   return (
     <li className="projects-item">
-      <span className="projects-item__text">ProjectItem</span>
+      <span className="projects-item__text">{projectName}</span>
     </li>
   );
 };

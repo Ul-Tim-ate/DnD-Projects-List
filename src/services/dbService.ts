@@ -7,9 +7,12 @@ import {
   Firestore,
   getDoc,
   getDocs,
+  query,
   QuerySnapshot,
   updateDoc,
+  where,
 } from "firebase/firestore";
+import { UserProject } from "../types/user-project";
 import AuthService from "./authService";
 
 export class DbService {
@@ -22,13 +25,21 @@ export class DbService {
   }
 
   getAllUserProjects = async () => {
-    const projects = await getDocs(collection(this.db, "projects"));
-    return projects;
+    const projects = query(
+      collection(this.db, "projects"),
+      where("userId", "==", this.authService.getUserAuth().currentUser?.uid)
+    );
+    const querySnapshot = await getDocs(projects);
+    let userProjects: UserProject[] = [];
+    querySnapshot.forEach((doc) => {
+      const { name } = doc.data();
+      const project: UserProject = { projectName: name, projectID: doc.id };
+      userProjects.push(project);
+    });
+    return userProjects;
   };
 
   createProject = async (name: string) => {
-    console.log(name);
-    
     const docRef = await addDoc(collection(this.db, "projects"), {
       name: name,
       userId: this.authService.getUserAuth().currentUser?.uid,
