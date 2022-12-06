@@ -26,6 +26,8 @@ const ProjectsList = () => {
   }, [projectsList]);
 
   if (loading) {
+    console.log(loading);
+    
     return <MySpinner />;
   }
 
