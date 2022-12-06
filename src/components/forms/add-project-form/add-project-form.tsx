@@ -37,7 +37,6 @@ const AddProjectForm: FC<AddProjectFormProps> = ({ setModalActive }) => {
           className="add-project-form__button"
           onClick={(e) => {
             e.preventDefault();
-            console.log("click");
             dispatch(createProjectAction(name));
             setModalActive(false);
           }}

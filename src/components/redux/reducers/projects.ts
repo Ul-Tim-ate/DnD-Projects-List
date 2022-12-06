@@ -8,15 +8,18 @@ const initialState = {
   projects: a,
 };
 
-const projects = (
-  state = initialState,
-  { type, payload }: any
-) => {
+const projects = (state = initialState, { type, payload }: any) => {
   switch (type) {
     case ProjectActionTypes.PROJECT_SUCCESSFUL_CREATED:
-      return state;
+      return {
+        ...state,
+        projects: [
+          ...state.projects,
+          { projectName: payload.projectName, projectID: payload.projectID },
+        ],
+      };
     case ProjectActionTypes.SET_USER_PROJECTS:
-      return {...state, projects: payload}
+      return { ...state, projects: payload };
     default:
       return state;
   }
