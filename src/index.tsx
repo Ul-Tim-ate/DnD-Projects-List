@@ -8,7 +8,7 @@ import { GlobalServices } from "./types/global-services";
 import { DbService } from "./services/dbService";
 import { getFirestore } from "firebase/firestore";
 import { Provider } from "react-redux";
-import store from "./components/redux/store";
+import store from "./redux/store";
 // import store from "./redux/store";
 
 const app = initializeApp({

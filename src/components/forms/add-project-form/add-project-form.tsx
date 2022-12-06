@@ -1,7 +1,7 @@
 import React, { FC, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
-import { createProjectAction } from "../../redux/actions/projectActionCreator";
+import { createProjectAction } from "../../../redux/actions/projectActionCreator";
 import "./add-project-form.sass";
 
 interface AddProjectFormProps {

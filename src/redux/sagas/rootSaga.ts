@@ -1,9 +1,9 @@
 import { takeEvery, call, put, all } from "@redux-saga/core/effects";
 import { DocumentData, QuerySnapshot } from "firebase/firestore";
-import { dbService } from "../../..";
-import { ProjectActionType } from "../../../types/project-redux/project-action";
-import { ProjectActionTypes } from "../../../types/project-redux/project-action-types";
-import { UserProject } from "../../../types/user-project";
+import { dbService } from "../..";
+import { ProjectActionType } from "../../types/project-redux/project-action";
+import { ProjectActionTypes } from "../../types/project-redux/project-action-types";
+import { UserProject } from "../../types/user-project";
 import {
   projectCreateSuccess,
   setUserProjectsAction,

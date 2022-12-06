@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { ProjectsState } from "../../../types/project-redux/project-state";
 import { UserProject } from "../../../types/user-project";
-import { getUserProjectsAction } from "../../redux/actions/projectActionCreator";
+import { getUserProjectsAction } from "../../../redux/actions/projectActionCreator";
 import MySpinner from "../../UI/my-spinner/my-spinner";
 import ProjectsItem from "../projects-item/projects-item";
 import "./projects-list.sass";
@@ -27,7 +27,7 @@ const ProjectsList = () => {
 
   if (loading) {
     console.log(loading);
-    
+
     return <MySpinner />;
   }
 
