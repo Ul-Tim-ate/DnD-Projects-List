@@ -1,13 +1,19 @@
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
 import React, { useContext, useState } from "react";
 import { ServicesContext } from "../..";
 import Auth from "../auth/auth";
 import ProjectsPage from "../projects/projects-page/projects-page";
+import TusksPage from "../tusks/tusks-page/tusks-page";
 import MySpinner from "../UI/my-spinner/my-spinner";
 import "./App.sass";
 import "./rezet.sass";
 
 function App() {
+  return (
+    <div className="app">
+      <TusksPage />
+    </div>
+  );
   const { authService } = useContext(ServicesContext);
   const [user, setUser] = useState("");
   const [isLoading, setIsLoading] = useState(true);

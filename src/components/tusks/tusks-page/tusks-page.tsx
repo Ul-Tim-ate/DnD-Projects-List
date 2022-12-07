@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Dashboard from "../../dashboard/dashboard-table/dashboard";
 import Header from "../../header/header";
 import MyButton from "../../UI/my-button/my-button";
 import MyInput from "../../UI/my-input/my-input";
@@ -18,9 +19,10 @@ const TusksPage = () => {
         <div className="tusks-page__search">
           <MyInput id="search-tusk" />
         </div>
+        <Dashboard/>
       </div>
       <MyModal active={modalActive} setActive={setModalActive}>
-        фывфыв
+        Модальное окно
       </MyModal>
     </div>
   );
