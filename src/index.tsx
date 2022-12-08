@@ -32,11 +32,9 @@ const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
-  <React.StrictMode>
-    <Provider store={store}>
+  <Provider store={store}>
     <ServicesContext.Provider value={{ authService, dbService }}>
       <App />
     </ServicesContext.Provider>
-    </Provider>
-  </React.StrictMode>
+  </Provider>
 );

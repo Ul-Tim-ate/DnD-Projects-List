@@ -1,15 +1,39 @@
-import React from "react";
+import React, { FC } from "react";
+import { Droppable } from "react-beautiful-dnd";
 import TuskItem from "../tusk-item/tusk-item";
 import "./tusks-list.sass";
 
-const TusksList = () => {
+interface TusksListProps {
+  key: string;
+  column: {
+    id: string;
+    title: string;
+    taskIds: string[];
+  };
+  tasks: {
+    id: string;
+    content: string;
+  }[];
+}
+
+const TusksList: FC<TusksListProps> = ({ column, key, tasks }) => {
   return (
-    <ul className="tusks-list">
-      <TuskItem tuskName="Попить кофе"/>
-      <TuskItem tuskName="Попить кофе"/>
-      <TuskItem tuskName="Попитьывфыфвфывфывыфвфыв"/>
-      <TuskItem tuskName="Попить кофе"/>
-    </ul>
+    <Droppable droppableId={column.id}>
+      {(provided) => {
+        return (
+          <ul
+            className="tusks-list"
+            {...provided.droppableProps}
+            ref={provided.innerRef}
+          >
+            {tasks.map((task, index) => {
+              return <TuskItem {...task} index={index} key={task.id} />;
+            })}
+            {provided.placeholder}
+          </ul>
+        );
+      }}
+    </Droppable>
   );
 };
 

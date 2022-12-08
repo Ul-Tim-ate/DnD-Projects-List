@@ -1,18 +1,28 @@
 import React, { FC } from "react";
+import { Droppable } from "react-beautiful-dnd";
 import { DashBoardHeaders } from "../../../types/dashboard";
 import TusksList from "../../tusks/tusks-list/tusks-list";
 import "./dashboard-item.sass";
 
 interface DashboardItemProps {
-  columnName: DashBoardHeaders;
+  key: string;
+  column: {
+    id: string;
+    title: string;
+    taskIds: string[];
+  };
+  tasks: {
+    id: string;
+    content: string;
+  }[];
 }
 
-const DashboardItem: FC<DashboardItemProps> = ({ columnName }) => {
+const DashboardItem: FC<DashboardItemProps> = (props) => {
   return (
     <li className="dashboard-item">
-      <h3 className="dashboard-item__header">{columnName}</h3>
+      <h3 className="dashboard-item__header">{props.column.title}</h3>
       <div className="dashboard-item__list">
-        <TusksList/>
+        <TusksList {...props} />
       </div>
     </li>
   );

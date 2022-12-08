@@ -4,10 +4,16 @@ import Header from "../../header/header";
 import MyButton from "../../UI/my-button/my-button";
 import MyInput from "../../UI/my-input/my-input";
 import MyModal from "../../UI/my-modal/my-modal";
+import { DragDropContext, DropResult } from "react-beautiful-dnd";
 import "./tusks-page.sass";
 
 const TusksPage = () => {
   const [modalActive, setModalActive] = useState(false);
+
+  const drugEnd = (result: DropResult) => {
+    // console.log(result);
+  };
+
   return (
     <div className="tusks-page">
       <Header />
@@ -19,7 +25,9 @@ const TusksPage = () => {
         <div className="tusks-page__search">
           <MyInput id="search-tusk" />
         </div>
-        <Dashboard/>
+        <DragDropContext onDragEnd={drugEnd}>
+          <Dashboard />
+        </DragDropContext>
       </div>
       <MyModal active={modalActive} setActive={setModalActive}>
         Модальное окно
