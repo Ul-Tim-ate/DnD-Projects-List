@@ -9,6 +9,7 @@ import { DbService } from "./services/dbService";
 import { getFirestore } from "firebase/firestore";
 import { Provider } from "react-redux";
 import store from "./redux/store";
+import { BrowserRouter } from "react-router-dom";
 // import store from "./redux/store";
 
 const app = initializeApp({
@@ -32,9 +33,11 @@ const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
-  <Provider store={store}>
-    <ServicesContext.Provider value={{ authService, dbService }}>
-      <App />
-    </ServicesContext.Provider>
-  </Provider>
+  <BrowserRouter>
+    <Provider store={store}>
+      <ServicesContext.Provider value={{ authService, dbService }}>
+        <App />
+      </ServicesContext.Provider>
+    </Provider>
+  </BrowserRouter>
 );

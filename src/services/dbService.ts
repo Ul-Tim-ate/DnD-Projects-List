@@ -25,6 +25,9 @@ export class DbService {
   }
 
   getAllUserProjects = async () => {
+    if (!this.authService.getUserAuth().currentUser) {
+      return [];
+    }
     const projects = query(
       collection(this.db, "projects"),
       where("userId", "==", this.authService.getUserAuth().currentUser?.uid)

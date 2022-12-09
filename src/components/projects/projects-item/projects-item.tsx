@@ -7,8 +7,6 @@ interface ProjectsItemProps {
 }
 
 const ProjectsItem: FC<ProjectsItemProps> = ({ projectName, projectID }) => {
-  // console.log(projectName);
-  
   return (
     <li className="projects-item">
       <span className="projects-item__text">{projectName}</span>

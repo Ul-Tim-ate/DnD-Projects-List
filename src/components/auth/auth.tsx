@@ -1,12 +1,28 @@
-import React, { useContext } from "react";
+import React, { FC, useContext, useState } from "react";
 import { ServicesContext } from "../..";
-import AuthService from "../../services/authService";
+import MySpinner from "../UI/my-spinner/my-spinner";
 import "./auth.sass";
 
-const Auth = () => {
+interface AuthProps {
+  user: string;
+}
+
+const Auth: FC<AuthProps> = ({ user }) => {
   const { authService } = useContext(ServicesContext);
-  const login = async () => {
+  const [loading, setLoading] = useState(false);  
+  if (user) {
+    setLoading(false);
+  }
+  if (loading) {
+    return (
+      <div className="app__loading">
+        <MySpinner />
+      </div>
+    );
+  }
+  const login = () => {
     authService.signInWithGoogle();
+    setLoading(true);
   };
 
   return (

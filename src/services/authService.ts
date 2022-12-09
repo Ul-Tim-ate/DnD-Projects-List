@@ -5,13 +5,15 @@ class AuthService {
     return getAuth();
   };
 
-  signInWithGoogle = () => {
+  signInWithGoogle = async () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(this.getUserAuth(), provider);
   };
 
   signOut = () => {
     getAuth().signOut();
+    console.log(getAuth().currentUser?.uid);
+    
   };
 }
 

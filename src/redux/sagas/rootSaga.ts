@@ -1,13 +1,28 @@
-import { takeEvery, call, put, all } from "@redux-saga/core/effects";
+import {
+  takeEvery,
+  call,
+  put,
+  all,
+  takeLatest,
+  take,
+} from "@redux-saga/core/effects";
+import { Auth } from "firebase/auth";
 import { DocumentData, QuerySnapshot } from "firebase/firestore";
 import { dbService } from "../..";
+import AuthService from "../../services/authService";
 import { ProjectActionType } from "../../types/project-redux/project-action";
 import { ProjectActionTypes } from "../../types/project-redux/project-action-types";
 import { UserProject } from "../../types/user-project";
+import { UserActionsTypes } from "../../types/user-redux/user-actions-types";
 import {
   projectCreateSuccess,
   setUserProjectsAction,
 } from "../actions/projectActionCreator";
+import {
+  createSetUserAction,
+} from "../actions/userActionCreator";
+
+const auth = new AuthService();
 
 function* createProjectSaga(action: ProjectActionType) {
   const { projectID, projectName } = yield call(

@@ -1,6 +1,9 @@
 import { onAuthStateChanged } from "firebase/auth";
 import React, { useContext, useState } from "react";
+import { useDispatch } from "react-redux";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { ServicesContext } from "../..";
+import { createSetUserAction } from "../../redux/actions/userActionCreator";
 import Auth from "../auth/auth";
 import ProjectsPage from "../projects/projects-page/projects-page";
 import TusksPage from "../tusks/tusks-page/tusks-page";
@@ -9,31 +12,28 @@ import "./App.sass";
 import "./rezet.sass";
 
 function App() {
-  return (
-    <div className="app">
-      <TusksPage />
-    </div>
-  );
   const { authService } = useContext(ServicesContext);
   const [user, setUser] = useState("");
-  const [isLoading, setIsLoading] = useState(true);
-  onAuthStateChanged(authService.getUserAuth(), (user) => {
-    if (user) {
-      setUser(user.uid);
-      setIsLoading(false);
-    } else {
-      setUser("");
-      setIsLoading(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  onAuthStateChanged(authService.getUserAuth(), (userAuth) => {
+    if (userAuth) {
+      if (user !== userAuth.uid) {
+        setUser(userAuth.uid);
+        dispatch(createSetUserAction({ id: userAuth.uid }));
+        navigate("/projects");
+      }
     }
   });
-  if (isLoading) {
-    return (
-      <div className="app__loading">
-        <MySpinner />
-      </div>
-    );
-  }
-  return <div className="app">{user ? <ProjectsPage /> : <Auth />}</div>;
+  return (
+    <div className="app">
+      <Routes>
+        <Route path="/" element={<Auth user={user} />} />
+        <Route path="/projects" element={<ProjectsPage />} />
+        <Route path="/tusks" element={<TusksPage />} />
+      </Routes>
+    </div>
+  );
 }
 
 export default App;
