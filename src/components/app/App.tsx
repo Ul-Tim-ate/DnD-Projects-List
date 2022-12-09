@@ -7,7 +7,6 @@ import { createSetUserAction } from "../../redux/actions/userActionCreator";
 import Auth from "../auth/auth";
 import ProjectsPage from "../projects/projects-page/projects-page";
 import TusksPage from "../tusks/tusks-page/tusks-page";
-import MySpinner from "../UI/my-spinner/my-spinner";
 import "./App.sass";
 import "./rezet.sass";
 

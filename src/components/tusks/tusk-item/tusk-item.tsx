@@ -2,13 +2,13 @@ import React, { FC } from "react";
 import { Draggable } from "react-beautiful-dnd";
 import "./tusk-item.sass";
 
-interface TuskItem {
+interface TuskItemProps {
   id: string;
   content: string;
   index: number;
 }
 
-const TuskItem: FC<TuskItem> = ({ id, content, index }) => {
+const TuskItem: FC<TuskItemProps> = ({ id, content, index }) => {
   return (
     <Draggable draggableId={id} index={index}>
       {(provided) => {

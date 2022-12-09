@@ -1,6 +1,4 @@
 import React, { FC } from "react";
-import { Droppable } from "react-beautiful-dnd";
-import { DashBoardHeaders } from "../../../types/dashboard";
 import TusksList from "../../tusks/tusks-list/tusks-list";
 import "./dashboard-item.sass";
 

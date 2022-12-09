@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import initialData from "../../../init-data";
-import { DashBoardHeaders } from "../../../types/dashboard";
 import DashboardItem from "../dashboard-item/dashboard-item";
 import "./dashboard.sass";
 

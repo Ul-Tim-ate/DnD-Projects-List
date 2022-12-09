@@ -7,17 +7,15 @@ import { getUserProjectsAction } from "../../../redux/actions/projectActionCreat
 import MySpinner from "../../UI/my-spinner/my-spinner";
 import ProjectsItem from "../projects-item/projects-item";
 import "./projects-list.sass";
-import User from "../../../types/user-redux/user";
 
 const ProjectsList = () => {
   const [loading, setLoading] = useState(true);
   const { projects }: { projects: ProjectsState[] } = useTypedSelector(
     (state) => state.projecter
   );
-  // const { user }: { user: string } = useTypedSelector((state) => state.user);
   const [projectsList, setProjectsList] = useState<UserProject[]>(projects);
 
-  if (JSON.stringify(projectsList) != JSON.stringify(projects)) {
+  if (JSON.stringify(projectsList) !== JSON.stringify(projects)) {
     setProjectsList(projects);
   }
   const dispatch = useDispatch();
