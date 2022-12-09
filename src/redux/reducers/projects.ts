@@ -6,6 +6,7 @@ const a: ProjectsState[] = [];
 
 const initialState = {
   projects: a,
+  isGetProjects: false,
 };
 
 const projects = (state = initialState, { type, payload }: any) => {
@@ -19,7 +20,7 @@ const projects = (state = initialState, { type, payload }: any) => {
         ],
       };
     case ProjectActionTypes.SET_USER_PROJECTS:
-      return { ...state, projects: payload };
+      return { ...state, projects: payload, isGetProjects: true };
     default:
       return state;
   }

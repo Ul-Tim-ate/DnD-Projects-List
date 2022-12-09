@@ -15,6 +15,9 @@ const ProjectsList = () => {
   const { projects }: { projects: ProjectsState[] } = useTypedSelector(
     (state) => state.projecter
   );
+  const { isGetProjects }: { isGetProjects: boolean } = useTypedSelector(
+    (state) => state.projecter
+  );
   const [projectsList, setProjectsList] = useState<UserProject[]>(projects);
   const { user }: { user: User } = useTypedSelector((state) => state.user);
   if (JSON.stringify(projectsList) !== JSON.stringify(projects)) {
@@ -25,15 +28,21 @@ const ProjectsList = () => {
     setLoading(true);
     if (user.id) {
       dispatch(getUserProjectsAction());
-      setLoading(false);
+      if (isGetProjects) {
+        setLoading(false);
+      }
     }
-  }, [projectsList, user]);
+  }, [projectsList, user, isGetProjects]);
 
-  if (loading || !user.id) {
-    return <MySpinner />;
+  if (loading) {
+    return (
+      <div className="projects-list__spinner">
+        <MySpinner />
+      </div>
+    );
   }
 
-  if (!projectsList.length) {
+  if (isGetProjects && !projects.length) {
     return <div className="">У вас ещё нет никаких проектов</div>;
   }
 
