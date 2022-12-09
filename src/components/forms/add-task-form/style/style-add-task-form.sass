@@ -1,0 +1,35 @@
+.add-tusk-form
+  display: flex
+  flex-direction: column
+  &__label
+    font-size: 15px
+    margin-bottom: 5px
+  &__input
+    border: 1px solid $darkGrey
+    padding: 5px
+    border-radius: 10px
+    width: 220px
+    margin-bottom: 5px
+    font-size: 14px
+  &__buttons
+    margin-top: 10px
+    display: flex
+    align-items: center
+    justify-content: space-between
+  &__button
+    font-size: 18px
+    &:first-child
+      background-color: $addButton
+      color: $white
+      transition: 0.2s
+      border-radius: 10px
+      padding: 5px
+      &:hover
+        color: $green
+    &:last-child
+      padding: 5px
+      border-radius: 10px
+      border: 1px solid $addButton
+      transition: 0.2s
+      &:hover
+        color: red

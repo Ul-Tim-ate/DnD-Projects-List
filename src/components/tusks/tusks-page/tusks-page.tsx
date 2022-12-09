@@ -6,10 +6,12 @@ import MyInput from "../../UI/my-input/my-input";
 import MyModal from "../../UI/my-modal/my-modal";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
 import "./tusks-page.sass";
+import initialData from "../../../init-data";
+import AddTaskForm from "../../forms/add-task-form/add-task-form";
 
 const TusksPage = () => {
   const [modalActive, setModalActive] = useState(false);
-
+  const state = initialData;
   const drugEnd = (result: DropResult) => {
     // console.log(result);
   };
@@ -30,7 +32,7 @@ const TusksPage = () => {
         </DragDropContext>
       </div>
       <MyModal active={modalActive} setActive={setModalActive}>
-        Модальное окно
+        <AddTaskForm setModalActive={setModalActive} />
       </MyModal>
     </div>
   );

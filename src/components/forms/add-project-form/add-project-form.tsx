@@ -15,7 +15,6 @@ const AddProjectForm: FC<AddProjectFormProps> = ({ setModalActive }) => {
     <form
       className="add-project-form"
       onSubmit={(e) => {
-        console.log("submit");
         e.preventDefault();
       }}
     >

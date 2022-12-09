@@ -1,3 +1,5 @@
+import { DashBoardHeaders } from "./types/dashboard";
+
 const initialData = {
   tasks: [
     { id: "task-1", content: "Take out the garbage" },
@@ -7,13 +9,16 @@ const initialData = {
   ],
   columns: [
     {
-      id: "column-1",
-      title: "To do",
+      id: DashBoardHeaders.QUEUE,
+      title: DashBoardHeaders.QUEUE,
       taskIds: ["task-1", "task-2", "task-3", "task-4"],
     },
   ],
-  // Facilitate reordering of the columns
-  columnOrder: ["column-1"],
+  columnOrder: [
+    DashBoardHeaders.QUEUE,
+    DashBoardHeaders.DEVELOPMENT,
+    DashBoardHeaders.DONE,
+  ],
 };
 
 export default initialData;
