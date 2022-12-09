@@ -10,7 +10,7 @@ const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const signOut = () => {
-    authService.signOut();
+    authService.signOut().then();
     dispatch(createSetUserAction({ id: "" }));
     navigate("/");
   };

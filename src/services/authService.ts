@@ -10,7 +10,7 @@ class AuthService {
     signInWithPopup(this.getUserAuth(), provider);
   };
 
-  signOut = () => {
+  signOut = async () => {
     getAuth().signOut();
     console.log(getAuth().currentUser?.uid);
     

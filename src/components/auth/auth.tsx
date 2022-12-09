@@ -9,20 +9,20 @@ interface AuthProps {
 
 const Auth: FC<AuthProps> = ({ user }) => {
   const { authService } = useContext(ServicesContext);
-  const [loading, setLoading] = useState(false);  
-  if (user) {
-    setLoading(false);
-  }
-  if (loading) {
-    return (
-      <div className="app__loading">
-        <MySpinner />
-      </div>
-    );
-  }
+  // const [loading, setLoading] = useState(false);  
+  // if (user) {
+  //   setLoading(false);
+  // }
+  // if (loading) {
+  //   return (
+  //     <div className="app__loading">
+  //       <MySpinner />
+  //     </div>
+  //   );
+  // }
   const login = () => {
     authService.signInWithGoogle();
-    setLoading(true);
+    // setLoading(true);
   };
 
   return (
