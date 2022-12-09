@@ -8,6 +8,7 @@ import MySpinner from "../../UI/my-spinner/my-spinner";
 import ProjectsItem from "../projects-item/projects-item";
 import "./projects-list.sass";
 import User from "../../../types/user-redux/user";
+import { Link } from "react-router-dom";
 
 const ProjectsList = () => {
   const [loading, setLoading] = useState(true);
@@ -16,7 +17,6 @@ const ProjectsList = () => {
   );
   const [projectsList, setProjectsList] = useState<UserProject[]>(projects);
   const { user }: { user: User } = useTypedSelector((state) => state.user);
-
   if (JSON.stringify(projectsList) !== JSON.stringify(projects)) {
     setProjectsList(projects);
   }
@@ -29,10 +29,10 @@ const ProjectsList = () => {
     }
   }, [projectsList, user]);
 
-  if (loading) {
+  if (loading || !user.id) {
     return <MySpinner />;
   }
-  
+
   if (!projectsList.length) {
     return <div className="">У вас ещё нет никаких проектов</div>;
   }
@@ -40,7 +40,15 @@ const ProjectsList = () => {
   return (
     <ul className="projects-list">
       {projects.map((project) => {
-        return <ProjectsItem {...project} key={project.projectID} />;
+        return (
+          <Link
+            to={`/projects/${project.projectID}`}
+            key={project.projectID}
+            className="projects-list__link"
+          >
+            <ProjectsItem {...project} />
+          </Link>
+        );
       })}
     </ul>
   );

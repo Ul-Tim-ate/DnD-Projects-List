@@ -1,23 +1,30 @@
-
 // @media (min-width: $breakpoint_sm)
-//   .projects-list
 
 @media (min-width: $breakpoint_md)
   .projects-list
     display: flex
     column-gap: 30px
-    flex-wrap: wrap 
+    flex-wrap: wrap
     row-gap: 20px
     &>li:not(:last-child)
       margin-bottom: 0
+    &__link
+      width: 30%
+      max-width: 30%
+      height: 100px
+      text-align: center
 
 @media (min-width: $breakpoint_xl)
   .projects-list
-    &__header
-      
+    &__link
+      height: 120px
 
-// @media (min-width: $breakpoints_xxl)
-//   .projects-list
+@media (min-width: $breakpoints_xxl)
+  .projects-list
+    &__link
+      height: 150px
 
-// @media (min-width: $breakpoints_xxxl)
-//   .projects-list
+@media (min-width: $breakpoints_xxxl)
+  .projects-list
+    &__link
+      height: 250px

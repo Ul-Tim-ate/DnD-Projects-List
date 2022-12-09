@@ -12,8 +12,6 @@ class AuthService {
 
   signOut = async () => {
     getAuth().signOut();
-    console.log(getAuth().currentUser?.uid);
-    
   };
 }
 
