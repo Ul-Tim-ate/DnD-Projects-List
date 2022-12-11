@@ -8,10 +8,14 @@ import { DragDropContext, DropResult } from "react-beautiful-dnd";
 import "./tusks-page.sass";
 // import initialData from "../../../init-data";
 import AddTaskForm from "../../forms/add-task-form/add-task-form";
+import { useParams } from "react-router-dom";
 
 const TusksPage = () => {
   const [modalActive, setModalActive] = useState(false);
   // const state = initialData;
+  let { id } = useParams();
+  console.log(id);
+  
   const drugEnd = (result: DropResult) => {
     // console.log(result);
   };

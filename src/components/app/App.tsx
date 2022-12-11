@@ -29,7 +29,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Auth user={user} />} />
         <Route path="/projects" element={<ProjectsPage />} />
-        <Route path="/tusks" element={<TusksPage />} />
+        <Route path="/projects/:id" element={<TusksPage />} />
       </Routes>
     </div>
   );

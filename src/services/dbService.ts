@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import {
   addDoc,
   collection,
@@ -24,6 +25,16 @@ export class DbService {
     this.authService = new AuthService();
   }
 
+  sortProjectsByTime = (userProjects: UserProject[]) => {
+    return userProjects.sort((a, b) => {
+      const firstProject = dayjs(a.createTime);
+      const secondProject = dayjs(b.createTime);
+      return firstProject.isAfter(secondProject) ? 1 : -1;
+    });
+  };
+
+  // a.createTime > b.createTime ? 1 : -1
+
   getAllUserProjects = async () => {
     if (!this.authService.getUserAuth().currentUser) {
       return [];
@@ -35,17 +46,22 @@ export class DbService {
     const querySnapshot = await getDocs(projects);
     let userProjects: UserProject[] = [];
     querySnapshot.forEach((doc) => {
-      const { name } = doc.data();
-      const project: UserProject = { projectName: name, projectID: doc.id };
+      const { name, createTime } = doc.data();
+      const project: UserProject = {
+        projectName: name,
+        projectID: doc.id,
+        createTime,
+      };
       userProjects.push(project);
     });
-    return userProjects;
+    return this.sortProjectsByTime(userProjects);
   };
 
   createProject = async (name: string) => {
     const docRef = await addDoc(collection(this.db, "projects"), {
       name: name,
       userId: this.authService.getUserAuth().currentUser?.uid,
+      createTime: dayjs().toString(),
     });
     const newProject = { projectID: docRef.id, projectName: name };
     return newProject;
