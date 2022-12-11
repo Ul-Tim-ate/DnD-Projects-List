@@ -1,7 +1,7 @@
 import { onAuthStateChanged } from "firebase/auth";
 import React, { useContext, useState } from "react";
 import { useDispatch } from "react-redux";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { ServicesContext } from "../..";
 import { createSetUserAction } from "../../redux/actions/userActionCreator";
 import Auth from "../auth/auth";
@@ -15,12 +15,20 @@ function App() {
   const [user, setUser] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+
   onAuthStateChanged(authService.getUserAuth(), (userAuth) => {
     if (userAuth) {
       if (user !== userAuth.uid) {
+        console.log(location);
+
         setUser(userAuth.uid);
         dispatch(createSetUserAction({ id: userAuth.uid }));
-        navigate("/projects");
+        if (location.pathname === "/") {
+          navigate(`/projects`);
+        } else {
+          navigate(`${location.pathname}`);
+        }
       }
     }
   });
