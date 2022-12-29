@@ -14,7 +14,6 @@ const TusksPage = () => {
   const [modalActive, setModalActive] = useState(false);
   // const state = initialData;
   let { id } = useParams();
-  console.log(id);
   
   const drugEnd = (result: DropResult) => {
     // console.log(result);

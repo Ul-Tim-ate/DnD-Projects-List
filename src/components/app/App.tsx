@@ -20,8 +20,6 @@ function App() {
   onAuthStateChanged(authService.getUserAuth(), (userAuth) => {
     if (userAuth) {
       if (user !== userAuth.uid) {
-        console.log(location);
-
         setUser(userAuth.uid);
         dispatch(createSetUserAction({ id: userAuth.uid }));
         if (location.pathname === "/") {
