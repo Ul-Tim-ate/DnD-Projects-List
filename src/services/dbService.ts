@@ -2,15 +2,9 @@ import dayjs from "dayjs";
 import {
   addDoc,
   collection,
-  deleteDoc,
-  doc,
-  DocumentData,
   Firestore,
-  getDoc,
   getDocs,
   query,
-  QuerySnapshot,
-  updateDoc,
   where,
 } from "firebase/firestore";
 import { UserProject } from "../types/user-project";
@@ -32,8 +26,6 @@ export class DbService {
       return firstProject.isAfter(secondProject) ? 1 : -1;
     });
   };
-
-  // a.createTime > b.createTime ? 1 : -1
 
   getAllUserProjects = async () => {
     if (!this.authService.getUserAuth().currentUser) {

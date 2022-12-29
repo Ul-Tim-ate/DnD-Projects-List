@@ -1,28 +1,12 @@
-import {
-  takeEvery,
-  call,
-  put,
-  all,
-  takeLatest,
-  take,
-} from "@redux-saga/core/effects";
-import { Auth } from "firebase/auth";
-import { DocumentData, QuerySnapshot } from "firebase/firestore";
+import { call, put, all, takeLatest } from "@redux-saga/core/effects";
 import { dbService } from "../..";
-import AuthService from "../../services/authService";
 import { ProjectActionType } from "../../types/project-redux/project-action";
 import { ProjectActionTypes } from "../../types/project-redux/project-action-types";
 import { UserProject } from "../../types/user-project";
-import { UserActionsTypes } from "../../types/user-redux/user-actions-types";
 import {
   projectCreateSuccess,
   setUserProjectsAction,
 } from "../actions/projectActionCreator";
-import {
-  createSetUserAction,
-} from "../actions/userActionCreator";
-
-const auth = new AuthService();
 
 function* createProjectSaga(action: ProjectActionType) {
   const { projectID, projectName } = yield call(
@@ -38,11 +22,11 @@ function* fetchUserProjectsSaga(action: ProjectActionType) {
 }
 
 function* watchCreateProjectSaga() {
-  yield takeEvery(ProjectActionTypes.CREATE_PROJECT, createProjectSaga);
+  yield takeLatest(ProjectActionTypes.CREATE_PROJECT, createProjectSaga);
 }
 
 function* watchFetchUserProjectsSaga() {
-  yield takeEvery(
+  yield takeLatest(
     ProjectActionTypes.FETCH_USER_PROJECTS,
     fetchUserProjectsSaga
   );
