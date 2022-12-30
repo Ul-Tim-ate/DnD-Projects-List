@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import initialData from "../../../init-data";
 import DashboardItem from "../dashboard-item/dashboard-item";
 import "./dashboard.sass";
 
 const Dashboard = () => {
-  const [state] = useState(initialData);
+  const state = useTypedSelector((state) => state.tusker);
   return (
     <ul className="dashboard-table">
       {state.columnOrder.map((columnId) => {
@@ -25,9 +26,6 @@ const Dashboard = () => {
           );
         }
       })}
-      {/* <DashboardItem columnName={DashBoardHeaders.QUEUE} />
-      <DashboardItem columnName={DashBoardHeaders.DEVELOPMENT} />
-      <DashboardItem columnName={DashBoardHeaders.DONE} /> */}
     </ul>
   );
 };

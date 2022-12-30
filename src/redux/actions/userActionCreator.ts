@@ -1,5 +1,5 @@
-import User from "../../types/user-redux/user";
-import { UserActionsTypes } from "../../types/user-redux/user-actions-types";
+import User from "../../types/user/user";
+import { UserActionsTypes } from "../../types/user/user-actions-types";
 
 export const createSetUserAction = (user: User) => {
   return {

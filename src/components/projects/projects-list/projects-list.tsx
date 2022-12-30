@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
-import { ProjectsState } from "../../../types/project-redux/project-state";
+import { ProjectsState } from "../../../types/project/project-state";
 import { UserProject } from "../../../types/user-project";
 import { getUserProjectsAction } from "../../../redux/actions/projectActionCreator";
 import MySpinner from "../../UI/my-spinner/my-spinner";
 import ProjectsItem from "../projects-item/projects-item";
 import "./projects-list.sass";
-import User from "../../../types/user-redux/user";
+import User from "../../../types/user/user";
 import { Link } from "react-router-dom";
 
 const ProjectsList = () => {
@@ -19,20 +19,20 @@ const ProjectsList = () => {
     (state) => state.projecter
   );
   const [projectsList, setProjectsList] = useState<UserProject[]>(projects);
-  const { user }: { user: User } = useTypedSelector((state) => state.user);
+  const { id }: { id: string } = useTypedSelector((state) => state.user);
   if (JSON.stringify(projectsList) !== JSON.stringify(projects)) {
     setProjectsList(projects);
   }
   const dispatch = useDispatch();
   useEffect(() => {
     setLoading(true);
-    if (user.id) {
+    if (id) {
       dispatch(getUserProjectsAction());
       if (isGetProjects) {
         setLoading(false);
       }
     }
-  }, [projectsList, user, isGetProjects]);
+  }, [projectsList, id, isGetProjects]);
 
   if (loading) {
     return (

@@ -1,4 +1,4 @@
-import { ProjectActionTypes } from "../../types/project-redux/project-action-types";
+import { ProjectActionTypes } from "../../types/project/project-action-types";
 import { UserProject } from "../../types/user-project";
 
 export const createProjectAction = (projectName: string) => {

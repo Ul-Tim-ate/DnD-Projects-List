@@ -1,7 +1,7 @@
 import { call, put, all, takeLatest } from "@redux-saga/core/effects";
 import { dbService } from "../..";
-import { ProjectActionType } from "../../types/project-redux/project-action";
-import { ProjectActionTypes } from "../../types/project-redux/project-action-types";
+import { ProjectActionType } from "../../types/project/project-action";
+import { ProjectActionTypes } from "../../types/project/project-action-types";
 import { UserProject } from "../../types/user-project";
 import {
   projectCreateSuccess,

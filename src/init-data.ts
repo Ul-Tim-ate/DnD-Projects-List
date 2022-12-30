@@ -11,7 +11,17 @@ const initialData = {
     {
       id: DashBoardHeaders.QUEUE,
       title: DashBoardHeaders.QUEUE,
-      taskIds: ["task-1", "task-2", "task-3", "task-4"],
+      taskIds: ["task-1", "task-2"],
+    },
+    {
+      id: DashBoardHeaders.DEVELOPMENT,
+      title: DashBoardHeaders.DEVELOPMENT,
+      taskIds: ["task-4"],
+    },
+    {
+      id: DashBoardHeaders.DONE,
+      title: DashBoardHeaders.DONE,
+      taskIds: ["task-3"],
     },
   ],
   columnOrder: [
