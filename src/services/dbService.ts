@@ -1,16 +1,17 @@
 import { Firestore } from "firebase/firestore";
 import AuthService from "./authService";
 import { ProjectService } from "./projectsService";
+import { TusksService } from "./tusksService";
 
 export class DbService {
-  db: Firestore;
   authService: AuthService;
   projectService: ProjectService;
+  tusksService: TusksService;
 
   constructor(db: Firestore) {
-    this.db = db;
     this.authService = new AuthService();
     this.projectService = new ProjectService(db, this.authService);
+    this.tusksService = new TusksService(db, this.authService);
   }
 
   getAllUserProjects = async () => {
