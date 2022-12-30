@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
-import initialData from "../../../init-data";
 import DashboardItem from "../dashboard-item/dashboard-item";
 import "./dashboard.sass";
 
