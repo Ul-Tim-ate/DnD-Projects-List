@@ -10,15 +10,14 @@ import { getFirestore } from "firebase/firestore";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import { BrowserRouter } from "react-router-dom";
-// import store from "./redux/store";
 
 const app = initializeApp({
-  apiKey: "AIzaSyBAIa8OG0eqbPGBNpEV0To4J538G2Ex7Go",
-  authDomain: "task-manager-d9e1d.firebaseapp.com",
-  projectId: "task-manager-d9e1d",
-  storageBucket: "task-manager-d9e1d.appspot.com",
-  messagingSenderId: "427055786718",
-  appId: "1:427055786718:web:982f3b0fd08fabde9cb04f",
+  apiKey: "AIzaSyCMIp4qwrpAEKSAJ722R3vT7hqDR__nJ7Y",
+  authDomain: "todo-list-dcd35.firebaseapp.com",
+  projectId: "todo-list-dcd35",
+  storageBucket: "todo-list-dcd35.appspot.com",
+  messagingSenderId: "52696240656",
+  appId: "1:52696240656:web:2cb0539a36a6369c51f095",
 });
 
 const authService = new AuthService();
