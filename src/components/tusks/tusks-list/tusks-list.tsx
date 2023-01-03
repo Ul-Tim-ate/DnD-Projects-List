@@ -25,7 +25,7 @@ const TusksList: FC<TusksListProps> = ({ column, key, tasks }) => {
             ref={provided.innerRef}
           >
             {tasks.map((task, index) => {
-              return <TuskItem {...task} index={index} key={task.id} />;
+              return <TuskItem task={task} index={index} key={task.id} />;
             })}
             {provided.placeholder}
           </ul>

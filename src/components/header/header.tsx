@@ -10,7 +10,7 @@ const Header = () => {
   const { authService } = useContext(ServicesContext);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  let { id } = useParams();
+  let { projectId } = useParams();
   const signOut = () => {
     authService.signOut().then();
     dispatch(createSetUserAction({ id: "" }));
@@ -20,7 +20,7 @@ const Header = () => {
   return (
     <header className="header">
       <div className="container">
-        {id ? (
+        {projectId ? (
           <Link className="header__back" to="/projects">
             <img
               src={back}

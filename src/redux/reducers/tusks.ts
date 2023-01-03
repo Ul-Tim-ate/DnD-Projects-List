@@ -49,6 +49,8 @@ const tusker = (
       return { ...payload };
     case TusksActionTypes.CREATE_TASK:
       return { ...state };
+    case TusksActionTypes.DROP_TASKS:
+      return { ...initialState };
     default:
       return state;
   }

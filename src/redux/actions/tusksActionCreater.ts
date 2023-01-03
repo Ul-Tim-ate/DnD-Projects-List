@@ -13,3 +13,7 @@ export const createTaskAction = (task: Task) => {
 export const getTusksAction = (projectId: string) => {
   return { type: TusksActionTypes.FETCH_TASKS, payload: projectId };
 };
+
+export const dropTusksAction = () => {
+  return { type: TusksActionTypes.DROP_TASKS };
+};

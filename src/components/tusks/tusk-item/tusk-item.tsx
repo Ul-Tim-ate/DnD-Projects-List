@@ -1,21 +1,21 @@
 import React, { FC } from "react";
 import { Draggable } from "react-beautiful-dnd";
+import { Task } from "../../../types/tusks/task";
 import "./tusk-item.sass";
 
 interface TuskItemProps {
-  id: string;
-  header: string;
+  task: Task;
   index: number;
 }
 
-const TuskItem: FC<TuskItemProps> = ({ id, header, index }) => {
+const TuskItem: FC<TuskItemProps> = ({ task, index }) => {
   return (
     <div
       onClick={() => {
-        console.log(id);
+        console.log(task.id);
       }}
     >
-      <Draggable draggableId={id} index={index}>
+      <Draggable draggableId={task.id} index={index}>
         {(provided) => {
           return (
             <li
@@ -24,7 +24,7 @@ const TuskItem: FC<TuskItemProps> = ({ id, header, index }) => {
               {...provided.draggableProps}
               ref={provided.innerRef}
             >
-              {header}
+              {task.header}
             </li>
           );
         }}

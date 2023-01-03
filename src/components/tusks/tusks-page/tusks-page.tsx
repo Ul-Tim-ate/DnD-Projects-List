@@ -11,9 +11,11 @@ import { useParams } from "react-router-dom";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { useDispatch } from "react-redux";
 import {
+  dropTusksAction,
   getTusksAction,
   setTusksAction,
 } from "../../../redux/actions/tusksActionCreater";
+import { DashBoardHeaders } from "../../../types/dashboard";
 
 const TusksPage = () => {
   const [modalActive, setModalActive] = useState(false);
@@ -25,6 +27,9 @@ const TusksPage = () => {
     if (id) {
       dispatch(getTusksAction(projectId));
     }
+    return () => {
+      dispatch(dropTusksAction());
+    };
   }, [id]);
   const drugEnd = (result: DropResult) => {
     const { destination, source, draggableId } = result;
