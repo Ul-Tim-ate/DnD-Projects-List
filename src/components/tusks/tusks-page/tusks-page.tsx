@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Dashboard from "../../dashboard/dashboard-table/dashboard";
 import Header from "../../header/header";
 import MyButton from "../../UI/my-button/my-button";
@@ -10,12 +10,22 @@ import AddTaskForm from "../../forms/add-task-form/add-task-form";
 import { useParams } from "react-router-dom";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { useDispatch } from "react-redux";
-import { setTusksAction } from "../../../redux/actions/tusksActionCreater";
+import {
+  getTusksAction,
+  setTusksAction,
+} from "../../../redux/actions/tusksActionCreater";
 
 const TusksPage = () => {
   const [modalActive, setModalActive] = useState(false);
   const state = useTypedSelector((state) => state.tusker);
+  const { id }: { id: string } = useTypedSelector((state) => state.user);
   const dispatch = useDispatch();
+  const { projectId = "" } = useParams();
+  useEffect(() => {
+    if (id) {
+      dispatch(getTusksAction(projectId));
+    }
+  }, [id]);
   const drugEnd = (result: DropResult) => {
     const { destination, source, draggableId } = result;
     if (!destination) {

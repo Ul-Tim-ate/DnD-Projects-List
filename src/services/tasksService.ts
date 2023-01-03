@@ -1,5 +1,12 @@
 import dayjs from "dayjs";
-import { addDoc, collection, Firestore } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  Firestore,
+  getDocs,
+  query,
+  where,
+} from "firebase/firestore";
 import { DashBoardHeaders } from "../types/dashboard";
 import { Task } from "../types/tusks/task";
 import AuthService from "./authService";
@@ -23,13 +30,45 @@ export class TasksService {
       projectID: task.projectID,
       status: DashBoardHeaders.QUEUE,
       userId: this.authService.getUserAuth().currentUser?.uid,
-      // createTime: dayjs().toString(),
     });
     const newTask = { taskID: docRef.id, taskName: task.header };
     return newTask;
   };
 
-  getTusks = () => {};
+  getTusks = async (projectId: string) => {
+    if (!this.authService.getUserAuth().currentUser) {
+      return [];
+    }
+    console.log(projectId,"taskserv");
+    
+    const projects = query(
+      collection(this.db, "tasks"),
+      where("projectID", "==", projectId)
+    );
+    const querySnapshot = await getDocs(projects);
+    let tasks: Task[] = [];
+    querySnapshot.forEach((doc) => {
+      const {
+        header,
+        description,
+        dateStart,
+        dateFinished,
+        projectID,
+        status,
+      } = doc.data();
+      const projectTask: Task = {
+        header,
+        description,
+        dateStart,
+        dateFinished,
+        projectID,
+        status,
+      };
+      tasks.push(projectTask);
+    });
+    console.log(tasks);
+    return tasks;
+  };
 
   deleteTusk = () => {};
 }

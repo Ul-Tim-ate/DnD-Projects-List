@@ -35,7 +35,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Auth user={user} />} />
         <Route path="/projects" element={<ProjectsPage />} />
-        <Route path="/projects/:id" element={<TusksPage />} />
+        <Route path="/projects/:projectId" element={<TusksPage />} />
       </Routes>
     </div>
   );

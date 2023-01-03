@@ -15,9 +15,16 @@ function* createTaskSaga({ type, payload }: { type: string; payload: Task }) {
   // yield put(projectCreateSuccess(projectName, projectID));
 }
 
-function* fetchUserProjectsSaga(action: ProjectActionType) {
-  const userProjects: UserProject[] = yield dbService.getAllUserProjects();
-  yield put(setUserProjectsAction(userProjects));
+function* fetchUserProjectsSaga({
+  type,
+  payload,
+}: {
+  type: string;
+  payload: string;
+}) {
+  const projectTasks: Task[] = yield dbService.getTasks(payload);
+  console.log(projectTasks);
+  // yield put(setUserProjectsAction(userProjects));
 }
 
 function* watchCreateTaskSaga() {

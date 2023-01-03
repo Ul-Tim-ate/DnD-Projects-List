@@ -13,12 +13,10 @@ import AuthService from "./authService";
 export class ProjectService {
   db: Firestore;
   authService: AuthService;
-
   constructor(db: Firestore, authService: AuthService) {
     this.db = db;
     this.authService = authService;
   }
-
   sortProjectsByTime = (userProjects: UserProject[]) => {
     return userProjects.sort((a, b) => {
       const firstProject = dayjs(a.createTime);

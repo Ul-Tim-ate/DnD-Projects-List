@@ -7,5 +7,4 @@ export interface Task {
   dateFinished: string;
   projectID: string;
   status: DashBoardHeaders;
-  userId: string;
 }

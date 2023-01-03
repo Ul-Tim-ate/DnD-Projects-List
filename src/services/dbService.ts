@@ -14,15 +14,19 @@ export class DbService {
     this.projectService = new ProjectService(db, this.authService);
     this.tusksService = new TasksService(db, this.authService);
   }
-
   getAllUserProjects = async () => {
     return await this.projectService.getAllUserProjects();
   };
+
   createProject = async (name: string) => {
     return await this.projectService.createProject(name);
   };
 
   createTask = async (task: Task) => {
     return await this.tusksService.createTusk(task);
+  };
+
+  getTasks = async (projectId: string) => {
+    return await this.tusksService.getTusks(projectId);
   };
 }

@@ -9,3 +9,7 @@ export const setTusksAction = (tuskList: TusksState) => {
 export const createTaskAction = (task: Task) => {
   return { type: TusksActionTypes.CREATE_TASK, payload: { ...task } };
 };
+
+export const getTusksAction = (projectId: string) => {
+  return { type: TusksActionTypes.FETCH_TASKS, payload: projectId };
+};
