@@ -7,7 +7,6 @@ import { getUserProjectsAction } from "../../../redux/actions/projectActionCreat
 import MySpinner from "../../UI/my-spinner/my-spinner";
 import ProjectsItem from "../projects-item/projects-item";
 import "./projects-list.sass";
-import User from "../../../types/user/user";
 import { Link } from "react-router-dom";
 
 const ProjectsList = () => {

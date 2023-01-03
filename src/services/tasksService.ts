@@ -1,4 +1,3 @@
-import dayjs from "dayjs";
 import {
   addDoc,
   collection,
@@ -9,7 +8,6 @@ import {
   updateDoc,
   doc,
 } from "firebase/firestore";
-import { DashBoardHeaders } from "../types/dashboard";
 import { Task } from "../types/tusks/task";
 import AuthService from "./authService";
 

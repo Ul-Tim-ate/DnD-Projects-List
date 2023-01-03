@@ -16,7 +16,6 @@ import {
   setTusksAction,
   updateStatusTaskAction,
 } from "../../../redux/actions/tusksActionCreater";
-import { DashBoardHeaders } from "../../../types/dashboard";
 
 const TusksPage = () => {
   const [modalActive, setModalActive] = useState(false);
