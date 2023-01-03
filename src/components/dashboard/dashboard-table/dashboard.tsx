@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import DashboardItem from "../dashboard-item/dashboard-item";
 import "./dashboard.sass";

@@ -28,10 +28,10 @@ export class TasksService {
       dateStart: task.dateStart,
       dateFinished: task.dateFinished,
       projectID: task.projectID,
-      status: DashBoardHeaders.QUEUE,
+      status: task.status,
       userId: this.authService.getUserAuth().currentUser?.uid,
     });
-    const newTask = { taskID: docRef.id, taskName: task.header };
+    const newTask = { taskID: docRef.id, task: task };
     return newTask;
   };
 

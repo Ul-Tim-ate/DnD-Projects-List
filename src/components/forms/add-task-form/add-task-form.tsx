@@ -20,7 +20,7 @@ const AddTaskForm: FC<AddTaskFormProps> = ({ setModalActive }) => {
   );
   const startDayRef = useRef<HTMLInputElement>(null);
   const finishDayRef = useRef<HTMLInputElement>(null);
-  let { id } = useParams();
+  let { projectId } = useParams();
   const dispatch = useDispatch();
 
   const submitNewTask = (e: React.FormEvent) => {
@@ -33,7 +33,7 @@ const AddTaskForm: FC<AddTaskFormProps> = ({ setModalActive }) => {
       description: desc,
       dateStart: startDay.toString(),
       dateFinished: finishDay.toString(),
-      projectID: id,
+      projectID: projectId,
       status: DashBoardHeaders.QUEUE,
     } as Task;
     dispatch(createTaskAction(newTask));

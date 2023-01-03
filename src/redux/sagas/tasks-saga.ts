@@ -1,21 +1,14 @@
 import { call, put, all, takeLatest } from "@redux-saga/core/effects";
 import { dbService } from "../..";
 import { DashBoardHeaders } from "../../types/dashboard";
-import { ProjectActionType } from "../../types/project/project-action";
-import { ProjectActionTypes } from "../../types/project/project-action-types";
 import { Task } from "../../types/tusks/task";
 import { TusksActionTypes } from "../../types/tusks/tusks-actions";
-import { UserProject } from "../../types/user-project";
-import {
-  projectCreateSuccess,
-  setUserProjectsAction,
-} from "../actions/projectActionCreator";
-import { setTusksAction } from "../actions/tusksActionCreater";
+import { getTusksAction, setTusksAction } from "../actions/tusksActionCreater";
 import { TusksState } from "../reducers/tusks";
 
 function* createTaskSaga({ type, payload }: { type: string; payload: Task }) {
-  const { taskID, taskName } = yield call(dbService.createTask, payload);
-  // yield put(projectCreateSuccess(projectName, projectID));
+  const { taskID, task } = yield call(dbService.createTask, payload);
+  yield put(getTusksAction(payload.projectID));
 }
 
 function* fetchUserProjectsSaga({
@@ -69,7 +62,6 @@ function* fetchUserProjectsSaga({
       DashBoardHeaders.DONE,
     ],
   };
-
   yield put(setTusksAction(tasksList));
 }
 
