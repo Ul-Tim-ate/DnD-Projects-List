@@ -7,7 +7,7 @@ import { getTusksAction, setTusksAction } from "../actions/tusksActionCreater";
 import { TusksState } from "../reducers/tusks";
 
 function* createTaskSaga({ type, payload }: { type: string; payload: Task }) {
-  const { taskID, task } = yield call(dbService.createTask, payload);
+  yield call(dbService.createTask, payload);
   yield put(getTusksAction(payload.projectID));
 }
 
@@ -66,6 +66,16 @@ function* fetchUserProjectsSaga({
   yield put(setTusksAction(tasksList));
 }
 
+function* changeStatusTaskSaga({
+  type,
+  payload,
+}: {
+  type: string;
+  payload: { taskId: string; status: DashBoardHeaders };
+}) {
+  yield call(dbService.changeTaskStatus, payload.taskId, payload.status);
+}
+
 function* watchCreateTaskSaga() {
   yield takeLatest(TusksActionTypes.CREATE_TASK, createTaskSaga);
 }
@@ -74,6 +84,14 @@ function* watchFetchTasksSaga() {
   yield takeLatest(TusksActionTypes.FETCH_TASKS, fetchUserProjectsSaga);
 }
 
+function* watchChangeStatusTaskSaga() {
+  yield takeLatest(TusksActionTypes.CHANGE_STATUS_TASK, changeStatusTaskSaga);
+}
+
 export default function* watchTasksSaga() {
-  yield all([watchFetchTasksSaga(), watchCreateTaskSaga()]);
+  yield all([
+    watchFetchTasksSaga(),
+    watchCreateTaskSaga(),
+    watchChangeStatusTaskSaga(),
+  ]);
 }

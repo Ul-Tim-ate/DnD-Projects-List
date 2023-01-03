@@ -1,3 +1,4 @@
+import { DashBoardHeaders } from "../../types/dashboard";
 import { Task } from "../../types/tusks/task";
 import { TusksActionTypes } from "../../types/tusks/tusks-actions";
 import { TusksState } from "../reducers/tusks";
@@ -16,4 +17,14 @@ export const getTusksAction = (projectId: string) => {
 
 export const dropTusksAction = () => {
   return { type: TusksActionTypes.DROP_TASKS };
+};
+
+export const updateStatusTaskAction = (
+  taskId: string,
+  status: string
+) => {
+  return {
+    type: TusksActionTypes.CHANGE_STATUS_TASK,
+    payload: { taskId, status },
+  };
 };

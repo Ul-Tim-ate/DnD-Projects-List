@@ -6,6 +6,8 @@ import {
   getDocs,
   query,
   where,
+  updateDoc,
+  doc,
 } from "firebase/firestore";
 import { DashBoardHeaders } from "../types/dashboard";
 import { Task } from "../types/tusks/task";
@@ -14,12 +16,10 @@ import AuthService from "./authService";
 export class TasksService {
   db: Firestore;
   authService: AuthService;
-
   constructor(db: Firestore, authService: AuthService) {
     this.db = db;
     this.authService = authService;
   }
-
   createTusk = async (task: Task) => {
     const docRef = await addDoc(collection(this.db, "tasks"), {
       // numberOfTask: number;
@@ -34,7 +34,6 @@ export class TasksService {
     const newTask = { taskID: docRef.id, task: task };
     return newTask;
   };
-
   getTusks = async (projectId: string) => {
     if (!this.authService.getUserAuth().currentUser) {
       return [];
@@ -66,6 +65,12 @@ export class TasksService {
       tasks.push(projectTask);
     });
     return tasks;
+  };
+  changeTaskStatus = async (taskId: string, status: string) => {
+    const taskRef = doc(this.db, "tasks", taskId);
+    await updateDoc(taskRef, {
+      status: status,
+    });
   };
 
   deleteTusk = () => {};

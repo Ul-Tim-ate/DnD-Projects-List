@@ -14,7 +14,9 @@ import {
   dropTusksAction,
   getTusksAction,
   setTusksAction,
+  updateStatusTaskAction,
 } from "../../../redux/actions/tusksActionCreater";
+import { DashBoardHeaders } from "../../../types/dashboard";
 
 const TusksPage = () => {
   const [modalActive, setModalActive] = useState(false);
@@ -43,7 +45,6 @@ const TusksPage = () => {
     }
     let startIndex: number = -1;
     let finishIndex: number = -1;
-
     const start = state.columns.find((el, index) => {
       startIndex = index;
       return el.id === source.droppableId;
@@ -66,12 +67,14 @@ const TusksPage = () => {
       dispatch(setTusksAction(newState));
       return;
     }
+    // if column is different
     const startTaskIds = Array.from(start.taskIds);
-    startTaskIds.splice(source.index, 1);
+    const changeTask = startTaskIds.splice(source.index, 1);
     const newStart = {
       ...start,
       taskIds: startTaskIds,
     };
+    dispatch(updateStatusTaskAction(changeTask[0], destination.droppableId));
     const finishTaskIds = Array.from(finish.taskIds);
     finishTaskIds.splice(destination.index, 0, draggableId);
     const newFinish = {

@@ -29,4 +29,7 @@ export class DbService {
   getTasks = async (projectId: string) => {
     return await this.tusksService.getTusks(projectId);
   };
+  changeTaskStatus = async (taskId: string, status: string) => {
+    this.tusksService.changeTaskStatus(taskId, status);
+  };
 }
