@@ -39,8 +39,6 @@ export class TasksService {
     if (!this.authService.getUserAuth().currentUser) {
       return [];
     }
-    console.log(projectId,"taskserv");
-    
     const projects = query(
       collection(this.db, "tasks"),
       where("projectID", "==", projectId)
@@ -63,10 +61,10 @@ export class TasksService {
         dateFinished,
         projectID,
         status,
+        id: doc.id,
       };
       tasks.push(projectTask);
     });
-    console.log(tasks);
     return tasks;
   };
 

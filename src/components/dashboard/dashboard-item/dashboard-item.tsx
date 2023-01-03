@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import { Task } from "../../../types/tusks/task";
 import TusksList from "../../tusks/tusks-list/tusks-list";
 import "./dashboard-item.sass";
 
@@ -9,10 +10,7 @@ interface DashboardItemProps {
     title: string;
     taskIds: string[];
   };
-  tasks: {
-    id: string;
-    content: string;
-  }[];
+  tasks: Task[];
 }
 
 const DashboardItem: FC<DashboardItemProps> = (props) => {

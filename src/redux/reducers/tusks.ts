@@ -1,10 +1,6 @@
 import { DashBoardHeaders } from "../../types/dashboard";
+import { Task } from "../../types/tusks/task";
 import { TusksActionTypes } from "../../types/tusks/tusks-actions";
-
-interface Tusk {
-  id: string;
-  content: string;
-}
 
 interface Column {
   id: string;
@@ -13,35 +9,28 @@ interface Column {
 }
 
 export interface TusksState {
-  tasks: Tusk[];
+  tasks: Task[];
   columns: Column[];
   columnOrder: string[];
 }
 
 const initialState = {
-  tasks: [
-    { id: "task-1", content: "Take out the garbage" },
-    { id: "task-2", content: "Watch my favorite show" },
-    { id: "task-3", content: "Charge my phone" },
-    { id: "task-4", content: "Cook dinner" },
-    { id: "task-5", content: "Cook lunch" },
-    { id: "task-6", content: "Cook coffee" },
-  ],
+  tasks: [],
   columns: [
     {
       id: DashBoardHeaders.QUEUE,
       title: DashBoardHeaders.QUEUE,
-      taskIds: ["task-1", "task-2", "task-5", "task-6"],
+      taskIds: [],
     },
     {
       id: DashBoardHeaders.DEVELOPMENT,
       title: DashBoardHeaders.DEVELOPMENT,
-      taskIds: ["task-4"],
+      taskIds: [],
     },
     {
       id: DashBoardHeaders.DONE,
       title: DashBoardHeaders.DONE,
-      taskIds: ["task-3"],
+      taskIds: [],
     },
   ],
   columnOrder: [

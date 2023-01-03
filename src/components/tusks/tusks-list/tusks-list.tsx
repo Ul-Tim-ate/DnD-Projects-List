@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import { Droppable } from "react-beautiful-dnd";
+import { Task } from "../../../types/tusks/task";
 import TuskItem from "../tusk-item/tusk-item";
 import "./tusks-list.sass";
 
@@ -10,10 +11,7 @@ interface TusksListProps {
     title: string;
     taskIds: string[];
   };
-  tasks: {
-    id: string;
-    content: string;
-  }[];
+  tasks: Task[];
 }
 
 const TusksList: FC<TusksListProps> = ({ column, key, tasks }) => {

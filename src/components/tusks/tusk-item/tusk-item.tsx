@@ -4,11 +4,11 @@ import "./tusk-item.sass";
 
 interface TuskItemProps {
   id: string;
-  content: string;
+  header: string;
   index: number;
 }
 
-const TuskItem: FC<TuskItemProps> = ({ id, content, index }) => {
+const TuskItem: FC<TuskItemProps> = ({ id, header, index }) => {
   return (
     <div
       onClick={() => {
@@ -24,7 +24,7 @@ const TuskItem: FC<TuskItemProps> = ({ id, content, index }) => {
               {...provided.draggableProps}
               ref={provided.innerRef}
             >
-              {content}
+              {header}
             </li>
           );
         }}
