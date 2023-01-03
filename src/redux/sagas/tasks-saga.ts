@@ -61,6 +61,7 @@ function* fetchUserProjectsSaga({
       DashBoardHeaders.DEVELOPMENT,
       DashBoardHeaders.DONE,
     ],
+    getTasks: true,
   };
   yield put(setTusksAction(tasksList));
 }

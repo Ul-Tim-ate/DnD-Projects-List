@@ -1,10 +1,18 @@
 import React from "react";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
+import MySpinner from "../../UI/my-spinner/my-spinner";
 import DashboardItem from "../dashboard-item/dashboard-item";
 import "./dashboard.sass";
 
 const Dashboard = () => {
   const state = useTypedSelector((state) => state.tusker);
+  if (!state.getTasks) {
+    return (
+      <div className="dashboard-table__spinner">
+        <MySpinner />
+      </div>
+    );
+  }
   return (
     <ul className="dashboard-table">
       {state.columnOrder.map((columnId) => {

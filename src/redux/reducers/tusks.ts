@@ -12,6 +12,7 @@ export interface TusksState {
   tasks: Task[];
   columns: Column[];
   columnOrder: string[];
+  getTasks: boolean;
 }
 
 const initialState = {
@@ -38,6 +39,7 @@ const initialState = {
     DashBoardHeaders.DEVELOPMENT,
     DashBoardHeaders.DONE,
   ],
+  getTasks: false,
 } as TusksState;
 
 const tusker = (
