@@ -1,12 +1,11 @@
 import { DashBoardHeaders } from "../dashboard";
 
-export interface Tusk {
-  number: number;
+export interface Task {
   header: string;
   description: string;
-  dateStart: Date;
-  dateFinished: Date;
-  priority: number;
+  dateStart: string;
+  dateFinished: string;
   projectID: string;
   status: DashBoardHeaders;
+  userId: string;
 }

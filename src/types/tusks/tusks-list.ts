@@ -1,7 +1,7 @@
 import { DashBoardHeaders } from "../dashboard";
-import { Tusk } from "./tusk";
+import { Task } from "./task";
 
-export interface TusksList {
-  tusks: Tusk[];
+export interface TasksList {
+  tasks: Task[];
   header: DashBoardHeaders;
 }

@@ -1,5 +1,10 @@
 import dayjs from "dayjs";
 import React, { useState, FC, useRef } from "react";
+import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
+import { createTaskAction } from "../../../redux/actions/tusksActionCreater";
+import { DashBoardHeaders } from "../../../types/dashboard";
+import { Task } from "../../../types/tusks/task";
 import "./add-task-form.sass";
 
 interface AddTaskFormProps {
@@ -15,27 +20,37 @@ const AddTaskForm: FC<AddTaskFormProps> = ({ setModalActive }) => {
   );
   const startDayRef = useRef<HTMLInputElement>(null);
   const finishDayRef = useRef<HTMLInputElement>(null);
-  const filesRef = useRef<HTMLInputElement>(null);
+  let { id } = useParams();
+  const dispatch = useDispatch();
+
+  const submitNewTask = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!startDay || !finishDay) {
+      return;
+    }
+    const newTask = {
+      header: name,
+      description: desc,
+      dateStart: startDay.toString(),
+      dateFinished: finishDay.toString(),
+      projectID: id,
+      status: DashBoardHeaders.QUEUE,
+    } as Task;
+    dispatch(createTaskAction(newTask));
+    setName("");
+    setDesc("");
+    setStartDay(undefined);
+    setFinishDay(undefined);
+    if (startDayRef.current) {
+      startDayRef.current.value = "";
+    }
+    if (finishDayRef.current) {
+      finishDayRef.current.value = "";
+    }
+  };
+
   return (
-    <form
-      className="add-tusk-form"
-      onSubmit={(e) => {
-        e.preventDefault();
-        setName("");
-        setDesc("");
-        setStartDay(undefined);
-        setFinishDay(undefined);
-        if (startDayRef.current) {
-          startDayRef.current.value = "";
-        }
-        if (finishDayRef.current) {
-          finishDayRef.current.value = "";
-        }
-        if (filesRef.current) {
-          filesRef.current.value = "";
-        }
-      }}
-    >
+    <form className="add-tusk-form" onSubmit={submitNewTask}>
       <label className="add-tusk-form__label" htmlFor="name">
         Название задачи
       </label>

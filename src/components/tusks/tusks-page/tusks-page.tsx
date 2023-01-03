@@ -16,8 +16,6 @@ const TusksPage = () => {
   const [modalActive, setModalActive] = useState(false);
   const state = useTypedSelector((state) => state.tusker);
   const dispatch = useDispatch();
-  let { id } = useParams();
-
   const drugEnd = (result: DropResult) => {
     const { destination, source, draggableId } = result;
     if (!destination) {
@@ -29,10 +27,6 @@ const TusksPage = () => {
     ) {
       return;
     }
-    // if () {
-
-    // }
-
     let startIndex: number = -1;
     let finishIndex: number = -1;
 

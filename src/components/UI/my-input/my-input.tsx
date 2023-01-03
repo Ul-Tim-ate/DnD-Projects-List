@@ -15,7 +15,7 @@ const MyInput: FC<MyInputProps> = ({ id }) => {
         className="my-input__input"
         id={id}
         type="text"
-        placeholder="Введите номер или заголовок задачи"
+        placeholder="Введите заголовок задачи"
       />
     </div>
   );

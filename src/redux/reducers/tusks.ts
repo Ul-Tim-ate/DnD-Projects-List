@@ -57,7 +57,9 @@ const tusker = (
 ) => {
   switch (type) {
     case TusksActionTypes.SET_TUSKS:
-      return {...payload};
+      return { ...payload };
+    case TusksActionTypes.CREATE_TASK:
+      return { ...state };
     default:
       return state;
   }
