@@ -39,7 +39,7 @@ const AddProjectForm: FC<AddProjectFormProps> = ({ setModalActive }) => {
             setModalActive(false);
           }}
         >
-          Отправить
+          Создать
         </button>
         <button
           className="add-project-form__button"

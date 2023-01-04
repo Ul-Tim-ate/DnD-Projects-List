@@ -109,7 +109,7 @@ const AddTaskForm: FC<AddTaskFormProps> = ({ setModalActive }) => {
             setModalActive(false);
           }}
         >
-          Отправить
+          Создать
         </button>
         <button
           className="add-tusk-form__button"
