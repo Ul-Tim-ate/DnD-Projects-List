@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo, useContext } from "react";
 import Dashboard from "../../dashboard/dashboard-table/dashboard";
 import Header from "../../header/header";
 import MyButton from "../../UI/my-button/my-button";
@@ -16,10 +16,22 @@ import {
   setTusksAction,
   updateStatusTaskAction,
 } from "../../../redux/actions/tusksActionCreater";
+import { TusksState } from "../../../redux/reducers/tusks";
+import { ServicesContext } from "../../..";
+import { DbService } from "../../../services/dbService";
+
+const getDisplayTasks = (
+  header: string,
+  state: TusksState,
+  dbService: DbService
+) => {
+  return dbService.getTasksByName(header, state);
+};
 
 const TusksPage = () => {
   const [modalActive, setModalActive] = useState(false);
-  const state = useTypedSelector((state) => state.tusker);
+  const [searchText, setSearchText] = useState("");
+  const state: TusksState = useTypedSelector((state) => state.tusker);
   const { id }: { id: string } = useTypedSelector((state) => state.user);
   const dispatch = useDispatch();
   const { projectId = "" } = useParams();
@@ -31,6 +43,11 @@ const TusksPage = () => {
       dispatch(dropTusksAction());
     };
   }, [id]);
+  const { dbService } = useContext(ServicesContext);
+  const displayTasks = useMemo(
+    () => getDisplayTasks(searchText, state, dbService),
+    [searchText, state]
+  );
   const drugEnd = (result: DropResult) => {
     const { destination, source, draggableId } = result;
     if (!destination) {
@@ -95,10 +112,14 @@ const TusksPage = () => {
           <MyButton value="Добавить задачу" activeModal={setModalActive} />
         </div>
         <div className="tusks-page__search">
-          <MyInput id="search-tusk" />
+          <MyInput
+            id="search-tusk"
+            searchText={searchText}
+            setSearchText={setSearchText}
+          />
         </div>
         <DragDropContext onDragEnd={drugEnd}>
-          <Dashboard />
+          <Dashboard tasksState={displayTasks} />
         </DragDropContext>
       </div>
       <MyModal active={modalActive} setActive={setModalActive}>

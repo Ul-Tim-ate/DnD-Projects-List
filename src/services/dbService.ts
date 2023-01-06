@@ -1,4 +1,5 @@
 import { Firestore } from "firebase/firestore";
+import { TusksState } from "../redux/reducers/tusks";
 import { Task } from "../types/tusks/task";
 import AuthService from "./authService";
 import { ProjectService } from "./projectsService";
@@ -31,5 +32,9 @@ export class DbService {
   };
   changeTaskStatus = async (taskId: string, status: string) => {
     this.tusksService.changeTaskStatus(taskId, status);
+  };
+
+  getTasksByName = (name: string, tusksState: TusksState) => {
+    return this.tusksService.getTaskByName(name, tusksState);
   };
 }

@@ -7,14 +7,12 @@ interface Column {
   title: string;
   taskIds: string[];
 }
-
 export interface TusksState {
   tasks: Task[];
   columns: Column[];
   columnOrder: string[];
   getTasks: boolean;
 }
-
 const initialState = {
   tasks: [],
   columns: [
@@ -44,7 +42,7 @@ const initialState = {
 
 const tusker = (
   state = initialState,
-  { type, payload }: { type: string; payload: TusksState }
+  { type, payload }: { type: string; payload: any }
 ) => {
   switch (type) {
     case TusksActionTypes.SET_TUSKS:

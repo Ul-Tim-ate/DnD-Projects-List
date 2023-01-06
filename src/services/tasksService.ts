@@ -8,6 +8,8 @@ import {
   updateDoc,
   doc,
 } from "firebase/firestore";
+import { TusksState } from "../redux/reducers/tusks";
+import { DashBoardHeaders } from "../types/dashboard";
 import { Task } from "../types/tusks/task";
 import AuthService from "./authService";
 
@@ -20,7 +22,6 @@ export class TasksService {
   }
   createTusk = async (task: Task) => {
     const docRef = await addDoc(collection(this.db, "tasks"), {
-      // numberOfTask: number;
       header: task.header,
       description: task.description,
       dateStart: task.dateStart,
@@ -70,6 +71,55 @@ export class TasksService {
       status: status,
     });
   };
-
   deleteTusk = () => {};
+  getTaskByName = (name: string, tusksState: TusksState) => {
+    const displayTasks = tusksState.tasks.filter((task) => {
+      return task.header.toLowerCase().includes(name.toLowerCase());
+    });
+    const queueColumn: string[] = [];
+    const devColumn: string[] = [];
+    const doneColumn: string[] = [];
+    displayTasks.forEach((task) => {
+      switch (task.status) {
+        case DashBoardHeaders.QUEUE:
+          queueColumn.push(task.id);
+          break;
+        case DashBoardHeaders.DEVELOPMENT:
+          devColumn.push(task.id);
+          break;
+        case DashBoardHeaders.DONE:
+          doneColumn.push(task.id);
+          break;
+        default:
+          break;
+      }
+    });
+    const tasksList: TusksState = {
+      tasks: displayTasks,
+      columns: [
+        {
+          id: DashBoardHeaders.QUEUE,
+          title: DashBoardHeaders.QUEUE,
+          taskIds: [...queueColumn],
+        },
+        {
+          id: DashBoardHeaders.DEVELOPMENT,
+          title: DashBoardHeaders.DEVELOPMENT,
+          taskIds: [...devColumn],
+        },
+        {
+          id: DashBoardHeaders.DONE,
+          title: DashBoardHeaders.DONE,
+          taskIds: [...doneColumn],
+        },
+      ],
+      columnOrder: [
+        DashBoardHeaders.QUEUE,
+        DashBoardHeaders.DEVELOPMENT,
+        DashBoardHeaders.DONE,
+      ],
+      getTasks: true,
+    };
+    return tasksList;
+  };
 }

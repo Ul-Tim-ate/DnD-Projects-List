@@ -11,7 +11,7 @@ function* createTaskSaga({ type, payload }: { type: string; payload: Task }) {
   yield put(getTusksAction(payload.projectID));
 }
 
-function* fetchUserProjectsSaga({
+function* fetchProjectTasksSaga({
   type,
   payload,
 }: {
@@ -81,7 +81,7 @@ function* watchCreateTaskSaga() {
 }
 
 function* watchFetchTasksSaga() {
-  yield takeLatest(TusksActionTypes.FETCH_TASKS, fetchUserProjectsSaga);
+  yield takeLatest(TusksActionTypes.FETCH_TASKS, fetchProjectTasksSaga);
 }
 
 function* watchChangeStatusTaskSaga() {
