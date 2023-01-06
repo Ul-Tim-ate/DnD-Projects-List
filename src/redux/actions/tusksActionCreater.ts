@@ -19,12 +19,19 @@ export const dropTusksAction = () => {
   return { type: TusksActionTypes.DROP_TASKS };
 };
 
-export const updateStatusTaskAction = (
+export const updateStatusTaskAction = (taskId: string, status: string) => {
+  return {
+    type: TusksActionTypes.CHANGE_STATUS_TASK,
+    payload: { taskId, status },
+  };
+};
+
+export const updateStatusTaskSucceedAction = (
   taskId: string,
   status: string
 ) => {
   return {
-    type: TusksActionTypes.CHANGE_STATUS_TASK,
+    type: TusksActionTypes.CHANGE_STATUS_TASK_SUCCEED,
     payload: { taskId, status },
   };
 };

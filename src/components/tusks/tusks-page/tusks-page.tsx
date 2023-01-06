@@ -25,14 +25,14 @@ const getDisplayTasks = (
   state: TusksState,
   dbService: DbService
 ) => {
-  return dbService.getTasksByName(header, state);
+  const newTasksState: TusksState = JSON.parse(JSON.stringify(state));
+  return dbService.getTasksByName(header, newTasksState);
 };
 
 const TusksPage = () => {
   const [modalActive, setModalActive] = useState(false);
   const [searchText, setSearchText] = useState("");
   const state: TusksState = useTypedSelector((state) => state.tusker);
-  
   const { id }: { id: string } = useTypedSelector((state) => state.user);
   const dispatch = useDispatch();
   const { projectId = "" } = useParams();
@@ -45,10 +45,13 @@ const TusksPage = () => {
     };
   }, [id]);
   const { dbService } = useContext(ServicesContext);
-  const displayTasks = useMemo(
-    () => getDisplayTasks(searchText, state, dbService),
-    [searchText, state]
-  );
+  const displayTasks = useMemo(() => {
+    if (!state.getTasks) {
+      return state;
+    }
+    return getDisplayTasks(searchText, state, dbService);
+  }, [searchText, state]);
+
   const drugEnd = (result: DropResult) => {
     const { destination, source, draggableId } = result;
     if (!destination) {
@@ -92,6 +95,7 @@ const TusksPage = () => {
       taskIds: startTaskIds,
     };
     dispatch(updateStatusTaskAction(changeTask[0], destination.droppableId));
+
     const finishTaskIds = Array.from(finish.taskIds);
     finishTaskIds.splice(destination.index, 0, draggableId);
     const newFinish = {

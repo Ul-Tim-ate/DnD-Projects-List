@@ -3,12 +3,15 @@ import { dbService } from "../..";
 import { DashBoardHeaders } from "../../types/dashboard";
 import { Task } from "../../types/tusks/task";
 import { TusksActionTypes } from "../../types/tusks/tusks-actions";
-import { getTusksAction, setTusksAction } from "../actions/tusksActionCreater";
+import {
+  getTusksAction,
+  setTusksAction,
+  updateStatusTaskSucceedAction,
+} from "../actions/tusksActionCreater";
 import { TusksState } from "../reducers/tusks";
 
 function* createTaskSaga({ type, payload }: { type: string; payload: Task }) {
-  yield call(dbService.createTask, payload);
-  yield put(getTusksAction(payload.projectID));
+  yield call(dbService.createTask, payload);  
 }
 
 function* fetchProjectTasksSaga({
@@ -74,6 +77,9 @@ function* changeStatusTaskSaga({
   payload: { taskId: string; status: DashBoardHeaders };
 }) {
   yield call(dbService.changeTaskStatus, payload.taskId, payload.status);
+  yield put(
+    updateStatusTaskSucceedAction(payload.taskId, payload.status.toString())
+  );
 }
 
 function* watchCreateTaskSaga() {

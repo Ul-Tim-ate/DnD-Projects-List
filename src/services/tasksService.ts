@@ -76,50 +76,19 @@ export class TasksService {
     const displayTasks = tusksState.tasks.filter((task) => {
       return task.header.toLowerCase().includes(name.toLowerCase());
     });
-    const queueColumn: string[] = [];
-    const devColumn: string[] = [];
-    const doneColumn: string[] = [];
-    displayTasks.forEach((task) => {
-      switch (task.status) {
-        case DashBoardHeaders.QUEUE:
-          queueColumn.push(task.id);
-          break;
-        case DashBoardHeaders.DEVELOPMENT:
-          devColumn.push(task.id);
-          break;
-        case DashBoardHeaders.DONE:
-          doneColumn.push(task.id);
-          break;
-        default:
-          break;
-      }
+    const columns = tusksState.columns.map((column) => {
+      const newColumn = column.taskIds.filter((id) => {
+        let flag = false;
+        displayTasks.forEach((task) => {
+          if (id === task.id) {
+            flag = true;
+          }
+        });
+        return flag;
+      });
+      return { ...column, taskIds: newColumn };
     });
-    const tasksList: TusksState = {
-      tasks: displayTasks,
-      columns: [
-        {
-          id: DashBoardHeaders.QUEUE,
-          title: DashBoardHeaders.QUEUE,
-          taskIds: [...queueColumn],
-        },
-        {
-          id: DashBoardHeaders.DEVELOPMENT,
-          title: DashBoardHeaders.DEVELOPMENT,
-          taskIds: [...devColumn],
-        },
-        {
-          id: DashBoardHeaders.DONE,
-          title: DashBoardHeaders.DONE,
-          taskIds: [...doneColumn],
-        },
-      ],
-      columnOrder: [
-        DashBoardHeaders.QUEUE,
-        DashBoardHeaders.DEVELOPMENT,
-        DashBoardHeaders.DONE,
-      ],
-      getTasks: true,
-    };
-    return tasksList;
+    tusksState.columns = columns;
+    return tusksState;
   };
 }
