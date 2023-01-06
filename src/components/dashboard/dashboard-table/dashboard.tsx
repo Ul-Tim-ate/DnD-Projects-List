@@ -8,10 +8,11 @@ import "./dashboard.sass";
 
 interface DashboardProps {
   tasksState: TusksState;
+  getTasks: boolean;
 }
 
-const Dashboard: FC<DashboardProps> = ({ tasksState: state }) => {
-  if (!state.getTasks) {
+const Dashboard: FC<DashboardProps> = ({ tasksState: state, getTasks }) => {
+  if (!getTasks) {
     return (
       <div className="dashboard-table__spinner">
         <MySpinner />

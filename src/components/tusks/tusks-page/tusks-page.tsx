@@ -32,6 +32,7 @@ const TusksPage = () => {
   const [modalActive, setModalActive] = useState(false);
   const [searchText, setSearchText] = useState("");
   const state: TusksState = useTypedSelector((state) => state.tusker);
+  
   const { id }: { id: string } = useTypedSelector((state) => state.user);
   const dispatch = useDispatch();
   const { projectId = "" } = useParams();
@@ -119,7 +120,7 @@ const TusksPage = () => {
           />
         </div>
         <DragDropContext onDragEnd={drugEnd}>
-          <Dashboard tasksState={displayTasks} />
+          <Dashboard tasksState={displayTasks} getTasks={state.getTasks} />
         </DragDropContext>
       </div>
       <MyModal active={modalActive} setActive={setModalActive}>
