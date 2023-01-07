@@ -16,6 +16,7 @@ const TuskItem: FC<TuskItemProps> = ({ task, index }) => {
     <div>
       <div
         onClick={() => {
+          console.log(task.id);
           setTaskModalActive(true);
         }}
       >

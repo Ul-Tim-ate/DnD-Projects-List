@@ -11,7 +11,7 @@ import {
 import { TusksState } from "../reducers/tusks";
 
 function* createTaskSaga({ type, payload }: { type: string; payload: Task }) {
-  yield call(dbService.createTask, payload);  
+  yield call(dbService.createTask, payload);
 }
 
 function* fetchProjectTasksSaga({
@@ -77,9 +77,6 @@ function* changeStatusTaskSaga({
   payload: { taskId: string; status: DashBoardHeaders };
 }) {
   yield call(dbService.changeTaskStatus, payload.taskId, payload.status);
-  yield put(
-    updateStatusTaskSucceedAction(payload.taskId, payload.status.toString())
-  );
 }
 
 function* watchCreateTaskSaga() {

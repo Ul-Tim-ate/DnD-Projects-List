@@ -29,6 +29,18 @@ const getDisplayTasks = (
   return dbService.getTasksByName(header, newTasksState);
 };
 
+function unique(arr: string[]) {
+  const result: string[] = [];
+
+  for (let str of arr) {
+    if (!result.includes(str)) {
+      result.push(str);
+    }
+  }
+
+  return result;
+}
+
 const TusksPage = () => {
   const [modalActive, setModalActive] = useState(false);
   const [searchText, setSearchText] = useState("");
@@ -63,49 +75,64 @@ const TusksPage = () => {
     ) {
       return;
     }
+    const newState: TusksState = JSON.parse(JSON.stringify(displayTasks));
     let startIndex: number = -1;
     let finishIndex: number = -1;
-    const start = state.columns.find((el, index) => {
+    const startColumn = newState.columns.find((el, index) => {
       startIndex = index;
       return el.id === source.droppableId;
     });
-    const finish = state.columns.find((el, index) => {
+    const finishColumn = newState.columns.find((el, index) => {
       finishIndex = index;
       return el.id === destination.droppableId;
     });
 
-    if (!start || !finish) {
+    if (!startColumn || !finishColumn) {
       return;
     }
-
-    if (start === finish) {
-      const newTasksIds = start.taskIds;
+    if (startColumn === finishColumn) {
+      const newTasksIds = startColumn.taskIds;
       newTasksIds.splice(source.index, 1);
       newTasksIds.splice(destination.index, 0, draggableId);
-      const newState = state;
-      newState.columns[startIndex].taskIds = newTasksIds;
-      dispatch(setTusksAction(newState));
+      const uniqueArr = [...newTasksIds, ...state.columns[startIndex].taskIds];
+      const oldState: TusksState = JSON.parse(JSON.stringify(state));
+      newState.columns[startIndex].taskIds = unique(uniqueArr);
+      oldState.columns[startIndex].taskIds = [
+        ...newState.columns[startIndex].taskIds,
+      ];
+      dispatch(setTusksAction(oldState));
       return;
     }
     // if column is different
-    const startTaskIds = Array.from(start.taskIds);
+    const startTaskIds = Array.from(startColumn.taskIds);
     const changeTask = startTaskIds.splice(source.index, 1);
-    const newStart = {
-      ...start,
-      taskIds: startTaskIds,
-    };
     dispatch(updateStatusTaskAction(changeTask[0], destination.droppableId));
-
-    const finishTaskIds = Array.from(finish.taskIds);
+    const finishTaskIds = Array.from(finishColumn.taskIds);
     finishTaskIds.splice(destination.index, 0, draggableId);
-    const newFinish = {
-      ...finish,
-      taskIds: finishTaskIds,
-    };
-    const newState = state;
-    newState.columns[startIndex] = newStart;
-    newState.columns[finishIndex] = newFinish;
-    dispatch(setTusksAction(newState));
+    const oldState: TusksState = JSON.parse(JSON.stringify(state));
+    oldState.columns[startIndex].taskIds = oldState.columns[
+      startIndex
+    ].taskIds.filter((task) => {
+      return changeTask[0] !== task;
+    });
+
+    const uniqueArrStart = [
+      ...startTaskIds,
+      ...oldState.columns[startIndex].taskIds,
+    ];
+    const uniqueArrFinish = [
+      ...finishTaskIds,
+      ...oldState.columns[finishIndex].taskIds,
+    ];
+    newState.columns[startIndex].taskIds = unique(uniqueArrStart);
+    newState.columns[finishIndex].taskIds = unique(uniqueArrFinish);
+    oldState.columns[startIndex].taskIds = [
+      ...newState.columns[startIndex].taskIds,
+    ];
+    oldState.columns[finishIndex].taskIds = [
+      ...newState.columns[finishIndex].taskIds,
+    ];
+    dispatch(setTusksAction(oldState));
   };
 
   return (

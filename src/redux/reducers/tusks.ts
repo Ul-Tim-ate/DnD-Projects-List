@@ -51,12 +51,6 @@ const tusker = (
       return { ...state };
     case TusksActionTypes.DROP_TASKS:
       return { ...initialState };
-    case TusksActionTypes.CHANGE_STATUS_TASK_SUCCEED:
-      const newTaskState = state;
-      newTaskState.tasks = state.tasks.map((task) =>
-        task.id === payload.taskId ? { ...task, status: payload.status } : task
-      );
-      return { ...newTaskState };
     default:
       return state;
   }
