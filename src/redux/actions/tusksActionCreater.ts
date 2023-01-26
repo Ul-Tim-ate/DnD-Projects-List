@@ -11,6 +11,13 @@ export const createTaskAction = (task: Task) => {
   return { type: TusksActionTypes.CREATE_TASK, payload: { ...task } };
 };
 
+export const createTaskSuceedAction = (task: Task) => {
+  return {
+    type: TusksActionTypes.CHANGE_STATUS_TASK_SUCCEED,
+    payload: { ...task },
+  };
+};
+
 export const getTusksAction = (projectId: string) => {
   return { type: TusksActionTypes.FETCH_TASKS, payload: projectId };
 };

@@ -47,12 +47,15 @@ const tusker = (
   switch (type) {
     case TusksActionTypes.SET_TUSKS:
       return { ...payload };
-    case TusksActionTypes.CREATE_TASK:
-      return { ...state };
+    case TusksActionTypes.CHANGE_STATUS_TASK_SUCCEED:
+      const newState: TusksState = JSON.parse(JSON.stringify(state));
+      newState.tasks.push(payload);
+      newState.columns[0].taskIds.push(payload.id);
+      return { ...newState };
     case TusksActionTypes.DROP_TASKS:
       return { ...initialState };
     default:
-      return state;
+      return { ...state };
   }
 };
 

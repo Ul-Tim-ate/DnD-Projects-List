@@ -4,6 +4,7 @@ import { DashBoardHeaders } from "../../types/dashboard";
 import { Task } from "../../types/tusks/task";
 import { TusksActionTypes } from "../../types/tusks/tusks-actions";
 import {
+  createTaskSuceedAction,
   getTusksAction,
   setTusksAction,
   updateStatusTaskSucceedAction,
@@ -11,7 +12,9 @@ import {
 import { TusksState } from "../reducers/tusks";
 
 function* createTaskSaga({ type, payload }: { type: string; payload: Task }) {
-  yield call(dbService.createTask, payload);
+  const a: { taskID: string } = yield call(dbService.createTask, payload);
+  payload.id = a.taskID;
+  yield put(createTaskSuceedAction(payload));
 }
 
 function* fetchProjectTasksSaga({
